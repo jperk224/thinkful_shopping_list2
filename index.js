@@ -6,23 +6,34 @@
 // some items are pre-added here so the DOM renders a non-empty list to start
 
 const store = [
-    {name: 'apples', checked: false},
-    {name: 'oranges', checked: false},
-    {name: 'milk', checked: true},
-    {name: 'bread', checked: false}
+    {id: cuid(), name: 'apples', checked: false},
+    {id: cuid(), name: 'oranges', checked: false},
+    {id: cuid(), name: 'milk', checked: true},
+    {id: cuid(), name: 'bread', checked: false}
 ]
 
 // Controller Functions //////////////////////////////
 
-function generateItemElement(item, index, template) {
+function generateItemElement(item) {
    // create an <li> string for an element provided
-   return `<li>${item.name}</li>`; 
+   return `
+    <li data-item-id="${item.id}">
+      <span class="shopping-item js-shopping-item ${item.checked ? "shopping-item__checked" : ''}">${item.name}</span>
+      <div class="shopping-item-controls">
+        <button class="shopping-item-toggle js-item-toggle">
+            <span class="button-label">check</span>
+        </button>
+        <button class="shopping-item-delete js-item-delete">
+            <span class="button-label">delete</span>
+        </button>
+      </div>
+    </li>`; 
 }
 
 function generateShoppingItemsString(shoppingList) {
     // generate the final string of <li>s to render the shopping list in the DOM
     console.log("Generating Shopping List");
-    const items = shoppingList.map((item, index) => generateItemElement(item, index));
+    const items = shoppingList.map((item) => generateItemElement(item));
     return items.join("");
 }
 
