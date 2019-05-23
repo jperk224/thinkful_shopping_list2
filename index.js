@@ -14,15 +14,16 @@ const store = [
 
 // Controller Functions //////////////////////////////
 
-function generateShoppingListItems(arr) {
+function generateItemElement(item, index, template) {
+   // create an <li> string for an element provided
+   return `<li>${item.name}</li>`; 
+}
+
+function generateShoppingItemsString(shoppingList) {
     // generate the final string of <li>s to render the shopping list in the DOM
     console.log("Generating Shopping List");
-    return `
-        <li>apples</li>
-        <li>oranges</li>
-        <li>milk</li>
-        <li>bread</li>
-    `;
+    const items = shoppingList.map((item, index) => generateItemElement(item, index));
+    return items.join("");
 }
 
 
@@ -35,8 +36,8 @@ function renderShoppingList() {
     // join the individual item strings in one single string
     // insert the final string into the '.js-shopping-list' <ul> in the DOM
     console.log("'renderShoppingList' ran");
-    const shoppingListItems = generateShoppingListItems(store);
-    $(".js-shopping-list").append(shoppingListItems);
+    const shoppingListItemsString = generateShoppingItemsString(store);
+    $(".js-shopping-list").append(shoppingListItemsString);
 }
 
 function handleNewItemSubmit() {
