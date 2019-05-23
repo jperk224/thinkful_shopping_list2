@@ -1,3 +1,19 @@
+'use strict';
+
+// The Model ///////////////////////////////////
+// store holds the shopping list item data
+// the 'checked' property for each item indicates whether or not the item is checked (i.e. crossed off)
+// some items are pre-added here so the DOM renders a non-empty list to start
+
+const store = [
+    {name: 'apples', checked: false},
+    {name: 'oranges', checked: false},
+    {name: 'milk', checked: true},
+    {name: 'bread', checked: false}
+]
+
+// Controller Functions //////////////////////////////
+
 function renderShoppingList() {
     // render the shopping list in the DOM
     // notification of successful execution
@@ -21,6 +37,8 @@ function handleDeleteItemClicked() {
     // notification of successful execution
     console.log("'handleDeleteItemClicked' ran");
 }
+
+// View ////////////////////////////////////////////////////
 
 function handleShoppingList() {
     // callback function when the page loads.
