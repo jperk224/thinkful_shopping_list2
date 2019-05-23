@@ -6,7 +6,7 @@
 // some items are pre-added here so the DOM renders a non-empty list to start
 
 const store = [
-    {id: cuid(), name: 'apples', checked: false},
+    {id: cuid(), name: 'apples', checked: true},
     {id: cuid(), name: 'oranges', checked: false},
     {id: cuid(), name: 'milk', checked: true},
     {id: cuid(), name: 'bread', checked: false}
@@ -53,16 +53,24 @@ function renderShoppingList() {
 
 function handleNewItemSubmit() {
     // facilitate users adding a new shopping list item
+    // When the user chooses to add the item
+    // Add the item to the 'store' array
+    // Render the updated shopping list
     console.log("'handleNewItemSubmit' ran");
 }
 
 function handleItemCheckClicked() {
     // toggle strikethrough for shopping list item when user marks it as 'checked'
+    // When the user marks an item as 'checked' by way of the 'check' button
+    // Toggle the .shopping-item_checked' class on the target <li> item
     console.log("'handleItemCheckclicked' ran");
 }
 
 function handleDeleteItemClicked() {
     // remove item from the list when users deletes the item
+    // When the user chooses to delete the item by way of the 'delete' button
+    // Remove the item from the 'store' array
+    // Render the updated shopping list
     console.log("'handleDeleteItemClicked' ran");
 }
 
