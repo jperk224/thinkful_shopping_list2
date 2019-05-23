@@ -14,27 +14,43 @@ const store = [
 
 // Controller Functions //////////////////////////////
 
+function generateShoppingListItems(arr) {
+    // generate the final string of <li>s to render the shopping list in the DOM
+    console.log("Generating Shopping List");
+    return `
+        <li>apples</li>
+        <li>oranges</li>
+        <li>milk</li>
+        <li>bread</li>
+    `;
+}
+
+
 function renderShoppingList() {
     // render the shopping list in the DOM
-    // notification of successful execution
+    // for each element in the 'store' array generate a string representing an <li>
+    // element.name rendered as inner text
+    // set the element's index as a data attribute on <li>
+    // element.checked rendered as presence of '.shopping-item__checked' class
+    // join the individual item strings in one single string
+    // insert the final string into the '.js-shopping-list' <ul> in the DOM
     console.log("'renderShoppingList' ran");
+    const shoppingListItems = generateShoppingListItems(store);
+    $(".js-shopping-list").append(shoppingListItems);
 }
 
 function handleNewItemSubmit() {
     // facilitate users adding a new shopping list item
-    // notification of successful execution
     console.log("'handleNewItemSubmit' ran");
 }
 
 function handleItemCheckClicked() {
     // toggle strikethrough for shopping list item when user marks it as 'checked'
-    // notification of successful execution
     console.log("'handleItemCheckclicked' ran");
 }
 
 function handleDeleteItemClicked() {
     // remove item from the list when users deletes the item
-    // notification of successful execution
     console.log("'handleDeleteItemClicked' ran");
 }
 
