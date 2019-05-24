@@ -57,7 +57,7 @@ function renderShoppingList() {
     // insert the final string into the '.js-shopping-list' <ul> in the DOM
     console.log("'renderShoppingList' ran");
     const shoppingListItemsString = generateShoppingItemsString(store);
-    $(".js-shopping-list").append(shoppingListItemsString);
+    $(".js-shopping-list").html(shoppingListItemsString);
 }
 
 function handleNewItemSubmit() {
@@ -76,6 +76,7 @@ function handleNewItemSubmit() {
             addItemToShoppingList(shoppingItem.val(), store);
             shoppingItem.val('');
             console.log(store);
+            renderShoppingList();
         }
       });
 }
