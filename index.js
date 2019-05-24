@@ -46,14 +46,14 @@ function addItemToShoppingList(item, arr) {
     arr.push(shoppingItemObject);
 }
 
+function getIdFromElement(item) {
+    return $(item).closest('li').data("item-id");
+}
+
 function crossOff(id, arr) {
-    let itemIndex = arr.findIndex(value => value.id === id);
-    if(arr[itemIndex].checked) {
-        arr[itemIndex].checked = false;
-    } else {
-        arr[itemIndex].checked = true;
-    }
-    console.log(arr[itemIndex].checked);
+    const item = arr.find(item => item.id === id);
+    item.checked = !item.checked;
+    console.log(item.checked);
 }
 
 
@@ -97,9 +97,9 @@ function handleItemCheckClicked() {
     // Retrieve the item's id from the data attribute.
     // Toggle the .shopping-item_checked' class on the target <li> item
     // Re-render the shopping list. When the user marks an item as 'checked' by way of the 'check' button
-    $(".js-shopping-list").on('click', '.js-item-toggle', function() {
+    $(".js-shopping-list").on('click', '.js-item-toggle', function(event) {
         console.log("'handleItemCheckclicked' ran");
-        let id = $(this).closest('li').attr("data-item-id");
+        let id = getIdFromElement(event.currentTarget);
         crossOff(id, store);
         renderShoppingList();
     });
