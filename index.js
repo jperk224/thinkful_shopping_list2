@@ -37,6 +37,15 @@ function generateShoppingItemsString(shoppingList) {
     return items.join("");
 }
 
+function addItemToShoppingList(item, arr) {
+    let shoppingItemObject = {
+        id: cuid(),
+        name: item,
+        checked: false
+    }
+    arr.push(shoppingItemObject);
+}
+
 
 function renderShoppingList() {
     // render the shopping list in the DOM
@@ -53,10 +62,22 @@ function renderShoppingList() {
 
 function handleNewItemSubmit() {
     // facilitate users adding a new shopping list item
-    // When the user chooses to add the item
-    // Add the item to the 'store' array
-    // Render the updated shopping list
-    console.log("'handleNewItemSubmit' ran");
+    // Listen for when users submit a new list item. And then...
+    // Get the name of the new item from the text input in our new item form
+    // Clear out the value from the input so eventually new items can be added
+    // Create an object representing the new item and add it to the shopping list 'store'
+    // Re-render the shopping list in the DOM in light of the updated 'store'
+    $('#js-shopping-list-form').submit(function(event) {
+        event.preventDefault();
+        console.log('`handleNewItemSubmit` ran');
+        let shoppingItem = $(".js-shopping-list-entry");
+        if(shoppingItem.val().length > 0) {
+            console.log(shoppingItem.val());
+            addItemToShoppingList(shoppingItem.val(), store);
+            shoppingItem.val('');
+            console.log(store);
+        }
+      });
 }
 
 function handleItemCheckClicked() {
@@ -81,7 +102,7 @@ function handleShoppingList() {
     // render the list and activate the functions responsible for handling
     // user events (i.e. add, check, delete)
     renderShoppingList();
-    handleNewItemSubmit();
+    handleNewItemSubmit(store);
     handleItemCheckClicked();
     handleDeleteItemClicked();
 }
