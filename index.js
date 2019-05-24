@@ -56,6 +56,10 @@ function crossOff(id, arr) {
     console.log(item.checked);
 }
 
+function deleteItem(id, arr) {
+    const itemIndex = arr.findIndex(item => item.id === id);
+    arr.splice(itemIndex, 1);
+}
 
 function renderShoppingList() {
     // render the shopping list in the DOM
@@ -107,10 +111,16 @@ function handleItemCheckClicked() {
 
 function handleDeleteItemClicked() {
     // remove item from the list when users deletes the item
-    // When the user chooses to delete the item by way of the 'delete' button
+    // Listen for when a user clicks the 'delete' button on an item
+    // Retrieve the item's id from the data attribute.
     // Remove the item from the 'store' array
     // Render the updated shopping list
-    console.log("'handleDeleteItemClicked' ran");
+    $(".js-shopping-list").on('click', '.js-item-delete', function(event) {
+        console.log("'handleDeleteItemClicked' ran");
+        let id = getIdFromElement(event.currentTarget);
+        deleteItem(id, store);
+        renderShoppingList();
+    });
 }
 
 // View ////////////////////////////////////////////////////
