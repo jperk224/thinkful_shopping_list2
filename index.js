@@ -46,6 +46,16 @@ function addItemToShoppingList(item, arr) {
     arr.push(shoppingItemObject);
 }
 
+function crossOff(id, arr) {
+    let itemIndex = arr.findIndex(value => value.id === id);
+    if(arr[itemIndex].checked) {
+        arr[itemIndex].checked = false;
+    } else {
+        arr[itemIndex].checked = true;
+    }
+    console.log(arr[itemIndex].checked);
+}
+
 
 function renderShoppingList() {
     // render the shopping list in the DOM
@@ -67,7 +77,7 @@ function handleNewItemSubmit() {
     // Clear out the value from the input so eventually new items can be added
     // Create an object representing the new item and add it to the shopping list 'store'
     // Re-render the shopping list in the DOM in light of the updated 'store'
-    $('#js-shopping-list-form').submit(function(event) {
+    $("#js-shopping-list-form").submit(function(event) {
         event.preventDefault();
         console.log('`handleNewItemSubmit` ran');
         let shoppingItem = $(".js-shopping-list-entry");
@@ -83,9 +93,16 @@ function handleNewItemSubmit() {
 
 function handleItemCheckClicked() {
     // toggle strikethrough for shopping list item when user marks it as 'checked'
-    // When the user marks an item as 'checked' by way of the 'check' button
+    // Listen for when a user clicks the 'check' button on an item.
+    // Retrieve the item's id from the data attribute.
     // Toggle the .shopping-item_checked' class on the target <li> item
-    console.log("'handleItemCheckclicked' ran");
+    // Re-render the shopping list. When the user marks an item as 'checked' by way of the 'check' button
+    $(".js-shopping-list").on('click', '.js-item-toggle', function() {
+        console.log("'handleItemCheckclicked' ran");
+        let id = $(this).closest('li').attr("data-item-id");
+        crossOff(id, store);
+        renderShoppingList();
+    });
 }
 
 function handleDeleteItemClicked() {
